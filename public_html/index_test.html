@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Test on HTML5 animation</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <style type="text/css">
+            #canvas1, #canvas2, #canvas3, #canvas4{
+                border: dotted 3px black;
+                background-color: lightGray;
+            }
+            
+        </style>
+        <script>
+            var arcX = 55, arcY = 400, arcR = 50;
+            var startP = 1.5*Math.PI;
+            var endP = 4*Math.PI;
+            var canvas = null;
+            var context  = null;
+            
+            function init(){
+                canvas = document.getElementById('canvas1');
+                context = canvas.getContext('2d');
+                
+                blank();
+                
+                //context.strokeStyle = "blue";
+                context.fillStyle = "purple";
+                //context.lineWidth = "5";
+                //context.arc(arcX,arcY,arcR,startP,endP);
+                context.fillRect(arcX, arcY,50,50);
+                context.fill();
+                //context.stroke();
+                setInterval(anim, 30);
+                    
+            }
+            
+            function blank(){
+                context.fillStyle = "#00ddee";
+                context.fillRect(0,0,context.canvas.width,context.canvas.height);
+            }
+            
+            function anim(){
+                if(arcX < context.canvas.width){
+                    blank();
+                    arcX += 5;
+                    //context.strokeStyle = "blue";
+                    context.fillStyle = "purple";
+                    //context.lineWidth = "5";
+                    //context.arc(arcX,arcY,arcR,startP,endP);
+                    context.fillRect(arcX, arcY, 50, 50);
+                    context.fill();
+                    //context.stroke();
+                    console.log(arcX);
+                }
+                else{
+                    arcX = -arcR;
+                }
+            }
+
+        </script>
+    </head>
+    <body>
+        <h1>First Canvas Example</h1>
+        <p>Here the canvas will be shown.</p>
+        <!--<canvas id="canvas1" width="1000" height="500">Your browser does not support the use of canvas</canvas>-->
+        <div>
+            <svg width="500" height="300" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+
+                <path d="M 100 350 q 150 -300 300 0"
+                  stroke="lightgrey" stroke-width="2" 
+                  fill="none"  id="motionPath"/>
+                <circle cx="40" cy="275" r="25" style="stroke:#006600; fill:#00cc00">
+                    <!--<animate id="one" attributeName="cx"
+                        from="40"
+                        to="435"
+                        begin="0s" dur="10s" fill="freeze" repeatCount="1"
+                        />
+                    <animate id="two" attributeName="cx"
+                        from="435"
+                        to="150"
+                        begin="one.end" dur="5s" fill="freeze" repeatCount="1"
+                        />-->
+                    <animateMotion begin="0s" dur="5s">
+                        <mpath xlink:href="#motionPath"/>
+                    </animateMotion>
+                    
+                </circle>
+                <rect x="450" y="0" width="20" height="80"
+                    style="stroke: #ff0000; fill: black;">
+                  <animateMotion
+                          path="M10,0 V10, 220"
+                          begin="0s" dur="10s" fill="freeze" repeatCount="1"
+                          />
+                </rect> 
+            </svg>
+        </div>
+    </body>
+</html>

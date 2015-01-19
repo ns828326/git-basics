@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Test on HTML5 animation</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <style type="text/css">
+            #canvas1, #canvas2, #canvas3, #canvas4{
+                border: dotted 3px black;
+                background-color: lightGray;
+            }
+            
+        </style>
+        <script>
+            window.onload = function(){
+                var theCanvas = document.getElementById('canvas1');
+                if(theCanvas && theCanvas.getContext){
+                    var ctx = theCanvas.getContext("2d");
+                    if(ctx){
+                       //draw a path
+                       ctx.strokeStyle = "red";
+                       ctx.fillStyle = "yellow";
+                       ctx.lineWidth = "5";
+                       ctx.beginPath();
+                       ctx.moveTo(35,180);
+                       ctx.lineTo(60,255);
+                       ctx.lineTo(160,30);
+                       ctx.lineTo(20,80);
+                       ctx.lineTo(85,80);
+                       ctx.fill();
+                       ctx.closePath();
+                       ctx.stroke();
+                       
+                       //draw an arc
+                       ctx.strokeStyle = "blue";
+                       ctx.fillStyle = "purple";
+                       ctx.lineWidth = "5";
+                       ctx.beginPath();
+                       ctx.arc(250,150,100,1.5*Math.PI,4*Math.PI);//1.5*Math.PI,2*Math.PI
+                       ctx.stroke();
+                       //ctx.beginPath();
+                       //ctx.arc(350,150,100,0,1.2*Math.PI,false);
+                       ctx.fill();
+                       ctx.stroke();
+                    }
+                }
+                var theCanvas = document.getElementById('canvas2');
+                if(theCanvas && theCanvas.getContext){
+                    var ctx = theCanvas.getContext("2d");
+                    if(ctx){
+                        //draw a simple bezier curve
+                        ctx.strokeStyle = "Cyan";
+                        ctx.lineWidth = "10";
+                        ctx.beginPath();
+                        ctx.moveTo(50,200);
+                        ctx.bezierCurveTo(25,100,200,300,200,150);
+                        ctx.stroke();
+                        //make the control points visible
+                        ctx.strokeStyle = "rgba(0,0,0,0.50)";
+                        ctx.lineWidth = "1";
+                        ctx.beginPath();
+                        ctx.moveTo(50,200);
+                        ctx.lineTo(25,100);
+                        ctx.lineTo(200,300);
+                        ctx.lineTo(200,150);
+                        ctx.stroke();   
+                    }
+                }
+                var theCanvas = document.getElementById('canvas3');
+                if(theCanvas && theCanvas.getContext){
+                    var ctx = theCanvas.getContext("2d");
+                    if(ctx){
+                        //set up basic shadow settings
+                        ctx.shadowColor = "#000000";
+                        ctx.shadowOffsetX = 10;
+                        ctx.shadowOffsetY = 10;
+                        ctx.shadowBlur = 50;
+                        
+                        //draw a simple rectangle with a shadow effect
+                        ctx.fillStyle = "blue";
+                        ctx.fillRect(20,20,200,100);
+                        
+                        //draw some text
+                        var txtString = "Drawing text on a canvas";
+                        ctx.fillStyle = "green";
+                        ctx.shadowColor = "rgba(0,0,0,0.5)";
+                        ctx.shadowOffsetX = 5;
+                        ctx.shadowOffsetY = 5;
+                        ctx.shadowBlur = 5;
+                        ctx.font = "25pt Georgia";
+                        ctx.fillText(txtString,50,275);
+                        
+                        //draw a red line with a purple shadow
+                        ctx.lineCap = "round";
+                        ctx.lineWidth = 25;
+                        ctx.shadowColor = "purple";
+                        ctx.shadowOffsetX = -15;
+                        ctx.shadowOffsetY = -5;
+                        ctx.shadowBlur = 15;
+                        ctx.strokeStyle = "red";
+                        ctx.beginPath();
+                        ctx.moveTo(50,200);
+                        ctx.lineTo(450,200);
+                        ctx.stroke();
+                    }
+                }
+                
+                var theCanvas = document.getElementById('canvas4');
+                if(theCanvas && theCanvas.getContext){
+                    var ctx = theCanvas.getContext("2d");
+                    if(ctx){
+                        //create a pattern from an image
+                        var patImg = new Image();
+                        patImg.onload = function(){
+                           ctx.fillStyle = ctx.createPattern(patImg,"repeat");
+                           ctx.fillRect(0,0,ctx.canvas.width,ctx.canvas.height);
+                        }
+                        patImg.src = "images/menu_separator.png";
+                    }
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <h1>First Canvas Example</h1>
+        <p>Here the canvas will be shown.</p>
+        <canvas id="canvas1" width="500" height="300">Your browser does not support the use of canvas</canvas>
+        <h1>Second Canvas Example</h1>
+        <p>Here the canvas will be shown.</p>
+        <canvas id="canvas2" width="500" height="300">Your browser does not support the use of canvas</canvas>
+        <h1>Third Canvas Example</h1>
+        <p>Here the canvas will be shown.</p>
+        <canvas id="canvas3" width="500" height="300">Your browser does not support the use of canvas</canvas>
+        <p>Here the canvas will be shown.</p>
+        <canvas id="canvas4" width="500" height="300">Your browser does not support the use of canvas</canvas>
+    </body>
+</html>
